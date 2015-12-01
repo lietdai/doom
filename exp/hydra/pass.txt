@@ -1,0 +1,13 @@
+admin
+123456
+password
+123qwe
+1qaz@WSZX
+toor
+P@ssw0rd
+12345678
+111111
+tomcat
+nagios
+zabbix
+

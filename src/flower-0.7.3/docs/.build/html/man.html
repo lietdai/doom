@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>flower &mdash; Flower 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Flower 0.8.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html">Flower 0.8.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+<div class="deck">
+
+</div>
+    <div class="section" id="flower">
+<h1>flower<a class="headerlink" href="#flower" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">flower</span></tt> [<em>OPTIONS</em>]</p>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Flower is a web based tool for monitoring and administrating Celery clusters.
+It has these features:</p>
+<ul>
+<li><p class="first">Real-time monitoring using Celery Events</p>
+<blockquote>
+<div><ul class="simple">
+<li>Task progress and history</li>
+<li>Ability to show task details (arguments, start time, runtime, and more)</li>
+<li>Graphs and statistics</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Remote Control</p>
+<blockquote>
+<div><ul class="simple">
+<li>View worker status and statistics</li>
+<li>Shutdown and restart worker instances</li>
+<li>Control worker pool size and autoscale settings</li>
+<li>View and modify the queues a worker instance consumes from</li>
+<li>View currently running tasks</li>
+<li>View scheduled tasks (ETA/countdown)</li>
+<li>View reserved and revoked tasks</li>
+<li>Apply time and rate limits</li>
+<li>Configuration viewer</li>
+<li>Revoke or terminate tasks</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Broker monitoring</p>
+<blockquote>
+<div><ul class="simple">
+<li>View statistics for all Celery queues</li>
+<li>Queue length graphs</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">HTTP API</p>
+</li>
+<li><p class="first">Basic Auth and Google OpenID authentication</p>
+</li>
+</ul>
+</div>
+<div class="section" id="options">
+<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--address</span></kbd></td>
+<td>run on the given address</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--auth</span></kbd></td>
+<td>regexp  of emails to grant access</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--basic_auth</span></kbd></td>
+<td>colon separated user-password to enable
+basic auth</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--broker_api</span></kbd></td>
+<td>inspect broker e.g.
+<a class="reference external" href="http://guest:guest&#64;localhost:15672/api/">http://guest:guest&#64;localhost:15672/api/</a></td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--certfile</span></kbd></td>
+<td>path to SSL certificate file</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--db</span></kbd></td>
+<td>flower database file (default <em>flower.db</em>)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--debug</span></kbd></td>
+<td>run in debug mode (default <em>False</em>)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--help</span></kbd></td>
+<td>show this help information</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--inspect</span></kbd></td>
+<td>inspect workers (default <em>True</em>)</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--inspect_timeout</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>inspect timeout (in milliseconds) (default
+<em>1000</em>)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--keyfile</span></kbd></td>
+<td>path to SSL key file</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--max_tasks</span></kbd></td>
+<td>maximum number of tasks to keep in memory
+(default <em>10000</em>)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--persistent</span></kbd></td>
+<td>enable persistent mode (default <em>False</em>)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--port</span></kbd></td>
+<td>run on the given port (default <em>5555</em>)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--url_prefix</span></kbd></td>
+<td>base url prefix</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--xheaders</span></kbd></td>
+<td>enable support for the &#8216;X-Real-Ip&#8217; and
+&#8216;X-Scheme&#8217; headers. (default <em>False</em>)</td></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="tornado-options">
+<h2>TORNADO OPTIONS<a class="headerlink" href="#tornado-options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--log_file_max_size</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>max size of log files before rollover
+(default <em>100000000</em>)</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--log_file_num_backups</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>number of log files to keep (default <em>10</em>)</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--log_file_prefix=<var>PATH</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Path prefix for log files. Note that if you
+are running multiple tornado processes,
+log_file_prefix must be different for each
+of them (e.g. include the port number)</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--log_to_stderr</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Send log output to stderr (colorized if
+possible). By default use stderr if
+<tt class="docutils literal"><span class="pre">--log_file_prefix</span></tt> is not set and no other
+logging is configured.</td></tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>&#8211;logging=debug|info|warning|error|none</dt>
+<dd>Set the Python log level. If <em>none</em>, tornado
+won&#8217;t touch the logging configuration.
+(default <em>info</em>)</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="usage">
+<h2>USAGE<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Launch the server and open <a class="reference external" href="http://localhost:5555">http://localhost:5555</a>:</p>
+<div class="highlight-python"><pre>$ flower --port=5555</pre>
+</div>
+<p>Or, launch from Celery:</p>
+<div class="highlight-python"><pre>$ celery flower --address=127.0.0.1 --port=5555</pre>
+</div>
+<p>Broker URL and other configuration options can be passed through the standard Celery options:</p>
+<div class="highlight-python"><pre>$ celery flower --broker=amqp://guest:guest@localhost:5672//</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p>
+  <iframe src="http://ghbtns.com/github-btn.html?user=mher&repo=flower&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screenshots.html">Screenshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auth.html#http-basic-authentication">HTTP Basic Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth.html#google-oauth-2-0">Google OAuth 2.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Running behind reverse proxy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Usage</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html">Flower 0.8.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Mher Movsisyan.
+    </div>
+  </body>
+</html>

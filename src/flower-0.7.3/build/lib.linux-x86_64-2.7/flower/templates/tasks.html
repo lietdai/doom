@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+  {% module Template("navbar.html", active_tab="tasks", absolute_url=absolute_url) %}
+{% end %}
+
+{% block extra_styles %}
+  <style type="text/css">
+    #task-filter-form, #task-filter-form .form-actions {
+      margin-bottom: 0;
+    }
+    #task-filter-form-accordion .accordion-inner {
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+    }
+  </style>
+{% end %}
+
+
+{% block container %}
+<div class="container-fluid">
+  <div id="task-filter-form-accordion" class="accordion">
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#task-filter-form-accordion" href="#task-filter-form-container">
+          Filter tasks
+        </a>
+      </div>
+      <div id="task-filter-form-container" class="accordion-body in collapse">
+        <div class="accordion-inner" style="padding-left: 0; padding-right: 0;">
+            <form id="task-filter-form" class="form-horizontal" action="{{ absolute_url('/tasks') }}" method="GET">
+            <div class="control-group">
+              <label class="control-label" for="input-limit">Limit:</label>
+              <div class="controls">
+                <input name="limit" type="text" class="input-small" id="input-limit"
+                       value="{{ limit or '' }}">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="select-worker">Workers:</label>
+
+              <div class="controls">
+                <select name="worker" id="select-worker">
+                  <option>All</option>
+                  {% for name in workers %}
+                  <option {% if name==worker %} selected {% end %}>{{ name }}</option>
+                  {% end %}
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="select-task">Seen task types:</label>
+
+              <div class="controls">
+                <select name="type" id="select-task">
+                  <option>All</option>
+                  {% for name in task_types %}
+                  <option {% if name==type %} selected {% end %}>{{ name }}</option>
+                  {% end %}
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="select-state">State:</label>
+
+              <div class="controls">
+                <select name="state" id="select-state">
+                  <option>All</option>
+                  {% for name in all_states %}
+                  <option {% if name==state %} selected {% end %}>{{ name }}</option>
+                  {% end %}
+                </select>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Apply filter</button>
+              <button class="btn" onclick="flower.on_cancel_task_filter(event)">Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>UUID</th>
+      <th>State</th>
+      <th>args</th>
+      <th>kwargs</th>
+      <th>Result</th>
+      <th>Received</th>
+      <th>Started</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for uuid, task in tasks %}
+    <tr>
+      <td>{{ getattr(task, 'name', None) }}</td>
+      <td><a href="{{ absolute_url('/task/' + task.uuid) }}">{{ task.uuid }}</a></td>
+      <td>
+        {% if task.state == "SUCCESS" %}
+          <span class="label label-success">{{ task.state }}</span>
+        {% elif task.state == "FAILURE" %}
+          <span class="label label-important">{{ task.state }}</span>
+        {% else %}
+          <span class="label label-default">{{ task.state }}</span>
+        {% end %}
+      </td>
+      <td>{{ humanize(task.args, length=20) }}</td>
+      <td>{{ humanize(task.kwargs, length=20) }}</td>
+      <td>{{ task.result }}</td>
+      <td>{{ humanize(task.received, type='time') }}</td>
+      <td>{{ humanize(task.started, type='time') }}</td>
+    </tr>
+    {% end %}
+  </table>
+  <div>
+{% end %}

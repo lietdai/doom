@@ -1,0 +1,13 @@
+admin
+root
+tomcat
+hadoop
+test
+nagios
+zabbix
+www
+wwwroot
+ftp
+adm
+oracle
+
